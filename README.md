@@ -22,7 +22,8 @@ If you are doing time-resolved, multi-temperature, radiation damage or other typ
 
 ## Description
 
- These scripts use the so-called "natural smoothing spline" feature available in the gnuplot package.
+ These scripts use the so-called "natural smoothing spline" feature available in the gnuplot package to take a series of related PDB files (say different time points) and create a new series of PDB files with arbitrary
+ spacing and xyz coordinates, occupancies, and B factors derived from a smooth curve fit to the original files. It runs in parallel to speed things up.
 <br>
 
 
@@ -48,12 +49,30 @@ Yes, I know the extension says `*.com`, but these are not Windows executables. T
 #### one thing at a time
 The first program you may want to run is:
 ```
-smooth_pdbs_atom.com refined_00?.pdb atom=123 weight=1 smult=1
+smooth_pdbs_atom.com refined_00?.pdb atom=123
 ```
-This will serve as a good test to see if everything is working. Success is indicated by the output of some files called smooth_vs_X.txt, which is the smoothed version of the X-coordinate of atom number 123 in all the files.
+This will serve as a good test to see if everything is working. Success is indicated by the output of some files called smooth_vs_X.txt, which is the smoothed version of the X-coordinate of atom number 123 in all the files. The parallel parent script below uses these text files to make the new PDBs. Other command-line options:
+- *.pdb    list of PDB files to smooth over
+- atom     ordinal number of atom in first pdb file to extract and smooth its coordinates
+- weight   increase data weight in smoothing function, higher numbers make result less smooth
+- in_states  specify "x" axis for smoothing as comma-separated list or start-end:step range. default extract from filenames
+- out_states specify "x" axis for output files.  default: same as inputs
 
 
-There are indeed other ways to do all these things, but this program is needed in the `$PATH` so it can be called by the above scripts.
+
+#### the big run
+The first program you may want to run is:
+```
+smooth_pdbs_multi.com refined_00?.pdb
+```
+This will take every atom in the first pdb file, extract copies with the same name from all the other files, make a smooth version of all the coordinates, occupancies and B factors, and then create a new series of PDB files containing those smoothed parameters.  If you re-refine these against the same data you will find your results are much more consistent across the series of data sets. Default is to make output files with the same spacings as the inputs, but you can also specify your own input and output coordinate series.
+Full list of command-line options is available by running with no arguments, as well as here:
+- *.pdb    list of PDB files to smooth over
+- ref=     single PDB file containing all possible atoms
+- weight   increase data weight in smoothing function, higher numbers make result less smooth
+- in_states  specify "x" axis for smoothing as comma-separated list or start-end:step range. default extract from filenames
+- out_states specify "x" axis for output files.  default: same as inputs
+
 
 
 ## Help
