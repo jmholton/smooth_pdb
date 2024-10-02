@@ -80,7 +80,4 @@ Full list of command-line options is available by running with no arguments, as 
 ## Help
 
 Let me know if you have any questions or find any bugs.  In general, debugging information is provided by adding the command-line option: `debug=1`, and possibly `tempfile=temp` to change the default temporary file prefix.
-```
-rst2pdb_runme.com amber.rst7 debug=1
-```
 
