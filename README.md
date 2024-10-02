@@ -68,6 +68,8 @@ smooth_pdbs_multi.com refined_00?.pdb
 This will take every atom in the first pdb file, extract copies with the same name from all the other files, make a smooth version of all the coordinates, occupancies and B factors, and then create a new series of PDB files containing those smoothed parameters.  If you re-refine these against the same data you will find your results are much more consistent across the series of data sets. Default is to make output files with the same spacings as the inputs, but you can also specify your own input and output coordinate series.
 Full list of command-line options is available by running with no arguments, as well as here:
 - *.pdb    list of PDB files to smooth over
+- CPUs=12  set the number of local CPUs to use at the same time
+- machine=node001 if running on multiple nodes, tell this script which node it is on 
 - ref=     single PDB file containing all possible atoms
 - weight   increase data weight in smoothing function, higher numbers make result less smooth
 - in_states  specify "x" axis for smoothing as comma-separated list or start-end:step range. default extract from filenames
