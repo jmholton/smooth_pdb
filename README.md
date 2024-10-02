@@ -23,13 +23,7 @@ If you are doing time-resolved, multi-temperature, radiation damage or other typ
 ## Description
 
  These scripts use the so-called "natural smoothing spline" feature available in the gnuplot package.
-a method for taking the constant N out of a constant NVT simulation. That is, you can safely add,
- remove or teleport waters in a simulation that is alredy flying. No need to run LEAP again, or to 
-re-heat the system from absolute zero. Instead, you can keep your velocities and sprinkle in a few
-more waters into any vacuum bubbles that have appeared. You may also strip out a few 
-waters at a time, or even teleport a water from a place where there is
-too much electron density to a place that needs more density, using a standard crystallographic
-Fo-Fc difference map as a guide. <br>
+<br>
 
 
 
